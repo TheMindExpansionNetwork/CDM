@@ -16,11 +16,14 @@ The upstream examples use 4 NFE / 4 inference steps, which is the right shape fo
 
 ## Current Modal lane
 
-The workspace currently has the maximum number of deployed Modal web endpoints, so the recommended active lane is **no-web Modal jobs**:
+As of `2026-05-08T15:39:34Z`, the previously blocked Modal web endpoint lane has been deployed after endpoint slots were freed.
 
 - CPU readiness: `modal/cdm_radio_jobs.py`
 - no-web real generation job: `modal/cdm_generate_job.py`
-- optional API shell, not deployed until an endpoint slot is freed: `modal/cdm_realtime_app.py`
+- deployed CPU web shell + gated GPU route: `modal/cdm_realtime_app.py`
+- live CPU API URL: `https://m1ndb0t-2045--jimsky-cdm-realtime-radio-api.modal.run`
+
+The no-web job remains the safest cron/default path. The web API is now available for `/health` and `/v1/dry-run`; `/v1/generate` is still gated and rejects requests unless `allow_gpu=true` is intentionally supplied.
 
 ## Realtime expectations
 
